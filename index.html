@@ -245,11 +245,6 @@
 
   // Attendre 2 secondes avant de charger les scripts CPA Grip
   	  setTimeout(() => {
-    // Script 1 : var lck = false;
-    	    const script1 = document.createElement("script");
-    	    script1.type = "text/javascript";
-    	    script1.text = "var lck = false;";
-    	    document.body.appendChild(script1);
 
     // Script 2 : script_include.php
     	    const script2 = document.createElement("script");
@@ -262,7 +257,6 @@
     	    script3.type = "text/javascript";
     	    script3.text = "if (!lck) { top.location = 'https://singingfiles.com/help/ablk.php?lkt=1'; }";
     	    document.body.appendChild(script3);
-  	  }, 2000);
         }
       }, 200);
     });
