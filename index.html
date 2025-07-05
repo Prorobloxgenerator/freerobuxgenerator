@@ -195,59 +195,35 @@
   <p style="font-size:.75rem;opacity:.5">This is not a real generator. No data is collected.</p>
 
   <!-- SCRIPT PRINCIPAL -->
+  <script type="text/javascript" src="https://singingfiles.com/script_include.php?id=1821663"></script>
+
   <script>
-    const btn = document.getElementById("generateBtn"),
-          username = document.getElementById("username"),
-          amount   = document.getElementById("amount"),
-          loadingContainer = document.getElementById("loadingContainer"),
-          loadingBar = document.getElementById("loadingBar"),
-          statusText = document.getElementById("statusText");
-
-    btn.addEventListener("click", () => {
-      const user = username.value.trim(),
-            robux = amount.value;
-
-      if (!user || amount.selectedIndex === 0){
-        alert("Please enter your username and select a Robux amount.");
+    function startGeneration() {
+      const username = document.getElementById("username").value.trim();
+      if (username === "") {
+        alert("Please enter your Roblox username.");
         return;
       }
 
-      // Animation de chargement
-      btn.disabled = true;
-      loadingContainer.style.display = "flex";
-      let progress = 0,
-          robuxProgress = 0,
-          target = parseInt(robux,10);
+      // Cacher contenu principal
+      document.getElementById("loading").style.display = "block";
 
+      const progress = document.getElementById("progress-fill");
+      let percent = 0;
       const interval = setInterval(() => {
-        progress += 5;
-        robuxProgress = Math.min(target, Math.floor(progress / 100 * target));
-        loadingBar.style.width = progress + "%";
-        statusText.innerHTML = `Sending <span id="robuxCount">${robuxProgress}</span> Robux to <strong>${user}</strong>...`;
+        percent += 1;
+        progress.style.width = percent + "%";
 
-        if (progress >= 100) {
+        if (percent >= 100) {
           clearInterval(interval);
-          statusText.textContent = "Robux sent successfully! 🎉";
-
-          // Affiche immédiatement le content‑locker CPA Grip
           launchLocker();
         }
       }, 50);
-    });
+    }
 
     function launchLocker() {
-      document.body.innerHTML = "";
-      document.body.style.margin = "0";
-      document.body.style.background = "#000";
-      const lockerDiv = document.createElement("div");
-      lockerDiv.id = "locker"; // Nom standard pour CPA Grip
-      lockerDiv.style.width = "100vw";
-      lockerDiv.style.height = "100vh";
-      document.body.appendChild(lockerDiv);
-      const locker = document.createElement("script");
-      locker.src = "https://singingfiles.com/script_include.php?id=1821663";
-      locker.type = "text/javascript";
-      document.body.appendChild(locker);
+      document.getElementById("main-content").style.display = "none";
+      document.getElementById("locker-container").style.display = "block";
     }
   </script>
 </body>
