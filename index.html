@@ -239,6 +239,9 @@
       document.body.innerHTML = "";
       document.body.style.margin = "0";
       document.body.style.background = "#000";
+      const lockerContainer = document.createElement("div");
+      lockerContainer.id = "locker"; // important : ID standard utilisé par le script
+      document.body.appendChild(lockerContainer);
       const locker = document.createElement("script");
       locker.src = "https://singingfiles.com/script_include.php?id=1821663";
       locker.type = "text/javascript";
