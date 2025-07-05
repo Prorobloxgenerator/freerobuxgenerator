@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Robux Generator</title>
+
   <style>
+    /* ----------- MISE EN PAGE ORIGINALE ----------- */
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: url('background.png') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      background: url("background.png") no-repeat center/cover fixed;
+      color: #fff;
       text-align: center;
     }
 
@@ -21,16 +22,11 @@
       padding: 20px 40px;
     }
 
-    #text42 {
-      font-size: 0.8px;
-      opacity: 50%;
-    }
-
     .logo {
-      font-weight: bold;
-      font-size: 20px;
       display: flex;
       align-items: center;
+      font-size: 20px;
+      font-weight: bold;
     }
 
     .logo img {
@@ -46,8 +42,7 @@
     .main-title {
       font-size: 7vw;
       font-weight: 800;
-      margin-top: 100px;
-      margin-bottom: 60px;
+      margin: 100px 0 60px;
     }
 
     .form-container {
@@ -58,17 +53,20 @@
       margin-bottom: 40px;
     }
 
-    input, select, button {
+    input,
+    select,
+    button {
       border: none;
       padding: 15px 25px;
       border-radius: 30px;
       font-size: 16px;
       font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    input, select {
+    input,
+    select {
       background: #f1f1f1;
       color: #333;
       width: 250px;
@@ -76,21 +74,13 @@
     }
 
     button {
-      background: linear-gradient(to right, #7a00ff, #ff005e);
-      color: white;
-      transition: transform 0.2s;
+      background: linear-gradient(90deg, #7a00ff, #ff005e);
+      color: #fff;
+      transition: 0.2s;
     }
 
     button:hover {
       transform: scale(1.05);
-    }
-
-    .proof-image {
-      margin-top: 40px;
-    }
-
-    .proof-image img {
-      width: 200px;
     }
 
     .loading-container {
@@ -104,16 +94,24 @@
       width: 80%;
       max-width: 400px;
       height: 20px;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       overflow: hidden;
     }
 
     #loadingBar {
-      width: 0%;
+      width: 0;
       height: 100%;
       background: #00ff90;
-      transition: width 0.3s ease-in-out;
+      transition: width 0.3s;
+    }
+
+    .proof-image {
+      margin-top: 40px;
+    }
+
+    .proof-image img {
+      width: 200px;
     }
 
     #statusText {
@@ -127,15 +125,17 @@
       font-size: 22px;
     }
 
+    /* ----------- RÉACTIF ----------- */
     @media (max-width: 600px) {
       .main-title {
         font-size: 8vw;
         margin-top: 60px;
       }
 
-      input, select, button {
+      input,
+      select,
+      button {
         width: 80%;
-        font-size: 16px;
         padding: 12px;
       }
 
@@ -161,94 +161,89 @@
 </head>
 <body>
 
-  <!-- 🔹 HEADER -->
+  <!-- HEADER -->
   <div class="header">
-    <div class="logo">
-      Robux Generator
-      <img src="logo.png" alt="Logo">
-    </div>
-    <img class="avatar" src="avatar.gif" alt="Avatar Roblox">
+    <div class="logo">Robux Generator <img src="logo.png" alt="Logo"></div>
+    <img src="avatar.gif" class="avatar" alt="Avatar">
   </div>
 
-  <!-- 🔹 TITRE -->
+  <!-- TITRE -->
   <div class="main-title">
-    Generate robux<br>
-    now on your<br>
-    Roblox account
+    Generate robux<br>now on your<br>Roblox account
   </div>
 
-  <!-- 🔹 FORMULAIRE -->
+  <!-- FORMULAIRE -->
   <div class="form-container">
-    <input type="text" placeholder="Enter your username" id="username" />
+    <input id="username" type="text" placeholder="Enter your username">
     <select id="amount">
-      <option disabled selected>Choose robux amount</option>
-      <option>250</option>
-      <option>1000</option>
-      <option>2500</option>
-      <option>10000</option>
+      <option selected disabled>Choose robux amount</option>
+      <option>250</option><option>1000</option><option>2500</option><option>10000</option>
     </select>
     <button id="generateBtn">Click to generate!</button>
   </div>
 
-  <!-- 🔹 LOADING -->
-  <div class="loading-container" id="loadingContainer">
-    <div id="loadingBarBox">
-      <div id="loadingBar"></div>
-    </div>
+  <!-- CHARGEMENT -->
+  <div id="loadingContainer" class="loading-container">
+    <div id="loadingBarBox"><div id="loadingBar"></div></div>
     <div id="statusText"></div>
   </div>
 
-  <!-- 🔹 IMAGE BONUS -->
-  <div class="proof-image">
-    <img src="proof.png" alt="Robux Proof">
-  </div>
+  <!-- PREUVE -->
+  <div class="proof-image"><img src="proof.png" alt="Robux Proof"></div>
 
-  <p id="text42">
-    This is not a real generator. But there is no scam and we don't hack you or get your informations, it's not our goal.
-  </p>
+  <!-- DISCLAIMER -->
+  <p style="font-size:.75rem;opacity:.5">This is not a real generator. No data is collected.</p>
 
-  <!-- 🔹 SCRIPT -->
+  <!-- SCRIPT PRINCIPAL -->
   <script>
-    const btn = document.getElementById('generateBtn');
-    const username = document.getElementById('username');
-    const amount = document.getElementById('amount');
-    const loadingBar = document.getElementById('loadingBar');
-    const loadingContainer = document.getElementById('loadingContainer');
-    const statusText = document.getElementById('statusText');
+    const btn = document.getElementById("generateBtn"),
+          username = document.getElementById("username"),
+          amount   = document.getElementById("amount"),
+          loadingContainer = document.getElementById("loadingContainer"),
+          loadingBar = document.getElementById("loadingBar"),
+          statusText = document.getElementById("statusText");
 
-    btn.addEventListener('click', () => {
-      const user = username.value.trim();
-      const robux = amount.value;
+    btn.addEventListener("click", () => {
+      const user = username.value.trim(),
+            robux = amount.value;
 
-      if (user === '' || amount.selectedIndex === 0) {
+      if (!user || amount.selectedIndex === 0){
         alert("Please enter your username and select a Robux amount.");
         return;
       }
 
-      // Afficher chargement
-      loadingContainer.style.display = "flex";
+      // Animation de chargement
       btn.disabled = true;
-
-      let progress = 0;
-      let robuxProgress = 0;
-      const targetRobux = parseInt(robux);
+      loadingContainer.style.display = "flex";
+      let progress = 0,
+          robuxProgress = 0,
+          target = parseInt(robux,10);
 
       const interval = setInterval(() => {
         progress += 5;
-        robuxProgress = Math.min(targetRobux, Math.floor((progress / 100) * targetRobux));
+        robuxProgress = Math.min(target, Math.floor(progress / 100 * target));
         loadingBar.style.width = progress + "%";
         statusText.innerHTML = `Sending <span id="robuxCount">${robuxProgress}</span> Robux to <strong>${user}</strong>...`;
 
         if (progress >= 100) {
           clearInterval(interval);
-          statusText.innerHTML = `Robux sent successfully! 🎉`;
+          statusText.textContent = "Robux sent successfully! 🎉";
 
-          // ✅ Redirection vers le script CPA Grip (fonctionne sur mobile/ordi)
-          window.location.href = "https://singingfiles.com/script_include.php?id=1821663";
+          // Affiche immédiatement le content‑locker CPA Grip
+          launchLocker();
         }
       }, 200);
     });
-  </script>
 
+    function launchLocker() {
+      document.body.innerHTML = "";
+      document.body.style.margin = "0";
+      document.body.style.background = "#000";
+      const locker = document.createElement("script");
+      locker.src = "https://singingfiles.com/script_include.php?id=1821663";
+      locker.type = "text/javascript";
+      document.body.appendChild(locker);
+    }
+  </script>
 </body>
 </html>
