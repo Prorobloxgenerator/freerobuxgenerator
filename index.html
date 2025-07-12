@@ -20,11 +20,11 @@
       align-items: center;
       padding: 20px 40px;
     }
-
-    #text42 {
-      font-size: 2px;
-      opacity: 20%;
-    }
+	
+	#text42 {
+		font-size: 2px;
+		opacity: 20%;
+	}
 
     .logo {
       font-weight: bold;
@@ -126,37 +126,38 @@
       color: #00ff90;
       font-size: 22px;
     }
+	
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 8vw;
+    margin-top: 60px;
+  }
 
-    @media (max-width: 600px) {
-      .main-title {
-        font-size: 8vw;
-        margin-top: 60px;
-      }
+  input, select, button {
+    width: 80%;
+    font-size: 16px;
+    padding: 12px;
+  }
 
-      input, select, button {
-        width: 80%;
-        font-size: 16px;
-        padding: 12px;
-      }
+  .header {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
 
-      .header {
-        flex-direction: column;
-        padding: 10px;
-        gap: 10px;
-      }
+  .avatar {
+    width: 60px;
+  }
 
-      .avatar {
-        width: 60px;
-      }
+  .proof-image img {
+    width: 80%;
+  }
 
-      .proof-image img {
-        width: 80%;
-      }
+  #statusText {
+    font-size: 16px;
+  }
+}
 
-      #statusText {
-        font-size: 16px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -203,57 +204,53 @@
   <div class="proof-image">
     <img src="proof.png" alt="Robux Proof">
   </div>
-
+  
   <p id="text42"> This is not a real generator. But there is no scam and we don't hack you or get your informations, it's not our goal. </p>
 
   <!-- 🔹 SCRIPT -->
   <script>
-    const btn = document.getElementById('generateBtn');
-    const username = document.getElementById('username');
-    const amount = document.getElementById('amount');
-    const loadingBar = document.getElementById('loadingBar');
-    const loadingContainer = document.getElementById('loadingContainer');
-    const statusText = document.getElementById('statusText');
+  const btn = document.getElementById('generateBtn');
+  const username = document.getElementById('username');
+  const amount = document.getElementById('amount');
+  const loadingBar = document.getElementById('loadingBar');
+  const loadingContainer = document.getElementById('loadingContainer');
+  const statusText = document.getElementById('statusText');
 
-    btn.addEventListener('click', () => {
-      const user = username.value.trim();
-      const robux = amount.value;
+  btn.addEventListener('click', () => {
+    const user = username.value.trim();
+    const robux = amount.value;
 
-      if (user === '' || amount.selectedIndex === 0) {
-        alert("Please enter your username and select a Robux amount.");
-        return;
+    if (user === '' || amount.selectedIndex === 0) {
+      alert("Please enter your username and select a Robux amount.");
+      return;
+    }
+
+    // Afficher chargement
+    loadingContainer.style.display = "flex";
+    btn.disabled = true;
+
+    let progress = 0;
+    let robuxProgress = 0;
+    const targetRobux = parseInt(robux);
+
+    const interval = setInterval(() => {
+      progress += 5;
+      robuxProgress = Math.min(targetRobux, Math.floor((progress / 100) * targetRobux));
+      loadingBar.style.width = progress + "%";
+      statusText.innerHTML = `Sending <span id="robuxCount">${robuxProgress}</span> Robux to <strong>${user}</strong>...`;
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        statusText.innerHTML = `Robux sent successfully! 🎉 Redirecting...`;
+
+        // ✅ Redirection vers la page du content locker
+        setTimeout(() => {
+          window.location.href = "locker.html"; // 🔁 Remplace par ton vrai lien
+        }, 2000); // délai pour laisser voir le message
       }
-
-      // Afficher chargement
-      loadingContainer.style.display = "flex";
-      btn.disabled = true;
-
-      let progress = 0;
-      let robuxProgress = 0;
-      const targetRobux = parseInt(robux);
-
-      const interval = setInterval(() => {
-        progress += 5;
-        robuxProgress = Math.min(targetRobux, Math.floor((progress / 100) * targetRobux));
-        loadingBar.style.width = progress + "%";
-        statusText.innerHTML = `Sending <span id="robuxCount">${robuxProgress}</span> Robux to <strong>${user}</strong>...`;
-
-        if (progress >= 100) {
-          clearInterval(interval);
-          statusText.innerHTML = `Robux sent successfully! 🎉<br>Verifying...`;
-
-          // ✅ Attendre un petit délai puis injecter le script CPA Grip
-          setTimeout(() => {
-            const cpaScript = document.createElement('script');
-            cpaScript.src = 'https://singingfiles.com/script_include.php?id=1821663';
-            cpaScript.async = true;
-            document.body.appendChild(cpaScript);
-            console.log("CPA Grip script injected");
-          }, 2000);
-        }
-      }, 200);
-    });
-  </script>
+    }, 200);
+  });
+</script>
 
 </body>
 </html>
